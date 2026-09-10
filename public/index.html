@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FCS · File Check System</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- ===== 左侧垂直侧边栏导航 ===== -->
+  <aside class="sidebar" id="sidebar">
+    <button id="sidebarHideBtn" class="brand-icon-btn" aria-label="隐藏侧边栏" title="隐藏侧边栏">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M13 10l3 2-3 2"/>
+      </svg>
+    </button>
+    <div class="sidebar-brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6" fill="#fff" stroke="none"/>
+          <path d="M7.4 11.4l1.2 1.2 2.2-2.4" stroke="#fff"/><circle cx="16" cy="18" r="1.6" fill="#fff" stroke="none"/>
+        </svg>
+      </span>
+      <div class="sidebar-brand-text">
+        <h1>FCS</h1>
+        <p class="sub">对象存储哈希一致性巡检</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav" aria-label="主导航">
+      <a class="nav-top-item" href="#sec-dashboard" data-target="sec-dashboard">
+        <span class="nav-parent-label">
+          <svg class="nav-parent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          仪表盘
+        </span>
+      </a>
+      <div class="nav-group" data-group="inspect">
+        <div class="nav-parent" data-toggle="inspect">
+          <span class="nav-parent-label">
+            <svg class="nav-parent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M7 14v-3M12 14V7M17 14v-5"/><path d="M8 21h8M12 17v4"/></svg>
+            巡检
+          </span>
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="nav-children" data-children="inspect">
+          <a class="nav-item" href="#sec-inspect"    data-target="sec-inspect"><span class="nav-text">执行巡检</span></a>
+          <a class="nav-item" href="#resultCard"     data-target="resultCard"><span class="nav-text">巡检结果</span></a>
+          <a class="nav-item" href="#sec-history"    data-target="sec-history"><span class="nav-text">历史巡检</span></a>
+        </div>
+      </div>
+      <div class="nav-group" data-group="settings">
+        <div class="nav-parent" data-toggle="settings">
+          <span class="nav-parent-label">
+            <svg class="nav-parent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            设置
+          </span>
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="nav-children" data-children="settings">
+          <a class="nav-item" href="#sec-zones"      data-target="sec-zones"><span class="nav-text">分区设置</span></a>
+          <a class="nav-item" href="#sec-markets"    data-target="sec-markets"><span class="nav-text">市场设置</span></a>
+          <a class="nav-item" href="#sec-storage"    data-target="sec-storage"><span class="nav-text">对象存储设置</span></a>
+          <a class="nav-item" href="#sec-settings"   data-target="sec-settings"><span class="nav-text">巡检设置</span></a>
+          <a class="nav-item" href="#sec-dingtalk"   data-target="sec-dingtalk"><span class="nav-text">钉钉通知</span></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="themeToggle" class="theme-toggle sidebar-theme" aria-label="切换浅色/暗色主题" title="切换主题">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+        <span class="theme-label">切换主题</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 侧栏隐藏后的浮动展开按钮 -->
+  <button id="sidebarShowBtn" class="sidebar-fab" aria-label="显示侧边栏" title="显示侧边栏（固定侧栏）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M15 10l-3 2 3 2"/>
+    </svg>
+  </button>
+
+  <main class="content" id="content">
+    <!-- 仪表盘 -->
+    <section class="card" id="sec-dashboard">
+      <div class="card-head">
+        <h2>仪表盘</h2>
+        <button id="refreshDashBtn" class="btn">刷新</button>
+      </div>
+      <div id="dashSummary" class="dash-stats"></div>
+      <div id="dashMarkets" class="dash-grid"></div>
+    </section>
+
+    <!-- 分区配置 -->
+    <section class="card" id="sec-zones">
+      <div class="card-head">
+        <h2>分区设置（服务器按分区分组）</h2>
+        <button id="addZoneBtn" class="btn">+ 新增分区</button>
+      </div>
+      <table id="zoneTable" class="tbl">
+        <thead><tr><th>分区ID</th><th>名称</th><th>网段</th><th>台数</th><th>操作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 市场配置 -->
+    <section class="card" id="sec-markets">
+      <div class="card-head">
+        <h2>市场设置</h2>
+        <button id="addMarketBtn" class="btn">+ 新增市场</button>
+      </div>
+      <table id="marketTable" class="tbl">
+        <thead><tr><th>启用</th><th>代码</th><th>名称</th><th>巡检时间</th><th>操作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 对象存储配置 -->
+    <section class="card" id="sec-storage">
+      <div class="card-head">
+        <h2>对象存储设置（TOS）</h2>
+      </div>
+      <div class="settings-row">
+        <label><input type="checkbox" id="osEnabled" /> 启用对象存储数据源</label>
+      </div>
+      <div class="settings-row">
+        <label>Region <input id="osRegion" type="text" placeholder="cn-shanghai" /></label>
+        <label>Endpoint <input id="osEndpoint" type="text" placeholder="tos-cn-shanghai.volces.com" /></label>
+        <label>Bucket <input id="osBucket" type="text" placeholder="mobilefile" /></label>
+      </div>
+      <div class="settings-row">
+        <label>Prefix <input id="osPrefix" type="text" placeholder="file/b2sumkline" /></label>
+        <label>本地目录 <input id="osLocalDir" type="text" placeholder="b2sumdata" /></label>
+      </div>
+      <div class="settings-row">
+        <label>AccessKey <input id="osAccessKey" type="text" placeholder="AKTP..." /></label>
+        <label>SecretKey <input id="osSecretKey" type="password" placeholder="..." /></label>
+      </div>
+      <div class="settings-row" style="margin-top:8px">
+        <label><input type="checkbox" id="osAutoSync" /> 定时自动拉取</label>
+        <label>模式
+          <select id="osSyncMode" style="width:120px">
+            <option value="interval">间隔（每 N 分钟）</option>
+            <option value="fixed">时间点（每天 HH:mm）</option>
+          </select>
+        </label>
+        <label id="osSyncIntervalLabel">间隔（分钟）<input id="osSyncInterval" type="number" min="1" value="5" style="width:72px" /></label>
+        <label id="osSyncFixedLabel">时间点 <input id="osSyncFixedTimes" type="text" placeholder="如 09:00,11:00,18:00" style="width:200px" /></label>
+      </div>
+      <div class="settings-row">
+        <span id="autoSyncStatus" class="tip"></span>
+      </div>
+      <div class="actions">
+        <button id="saveOsBtn" class="btn primary">保存对象存储配置</button>
+        <button id="testOsBtn" class="btn ghost">测试连接 / 发现服务器</button>
+        <button id="syncOsBtn" class="btn ghost" title="立即从对象存储拉取最新 b2sum 文件到本地 b2sumdata/">立即拉取文件</button>
+        <span id="osTip" class="tip"></span>
+      </div>
+      <div id="osDiscoverResult" class="card-section" style="display:none;margin-top:12px"></div>
+    </section>
+
+    <!-- 巡检设置 -->
+    <section class="card" id="sec-settings">
+      <div class="card-head"><h2><span class="step">04</span>巡检设置</h2></div>
+      <div class="settings-row">
+        <label>全局并发上限 <input type="number" id="concurrency" min="1" max="50" value="4" style="width:64px" /></label>
+      </div>
+      <div class="settings-row" style="margin-top:12px">
+        <label><input type="checkbox" id="inspectSchedEnabled" /> 定时巡检</label>
+        <label>模式
+          <select id="inspectSchedMode" style="width:120px">
+            <option value="global" selected>全局（所有市场）</option>
+            <option value="per-market">按市场</option>
+          </select>
+        </label>
+      </div>
+      <div id="schedGlobalRow" class="settings-row" style="margin-top:4px">
+        <label>巡检时间点（HH:mm，逗号分隔，所有市场统一时间）<input id="inspectSchedTimes" type="text" placeholder="09:00,15:00" style="width:200px" /></label>
+      </div>
+      <div id="schedPerMarketBox" class="card-section" style="display:none;margin-top:12px">
+        <div style="font-weight:600;margin-bottom:6px">按市场设置巡检时间（留空=该市场不定时巡检）</div>
+        <table class="tbl" id="schedMarketTbl">
+          <thead><tr><th>启用</th><th>市场代码</th><th>名称</th><th>巡检时间（HH:mm，逗号分隔）</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="actions" style="justify-content:flex-end">
+        <button id="saveConfigBtn" class="btn primary">保存</button>
+        <span id="saveTip" class="tip"></span>
+      </div>
+    </section>
+
+    <!-- 钉钉通知设置 -->
+    <section class="card" id="sec-dingtalk">
+      <div class="card-head"><h2><span class="step">05</span>钉钉通知</h2></div>
+      <div class="settings-row">
+        <label><input type="checkbox" id="dtEnabled" /> 启用钉钉通知</label>
+      </div>
+      <div class="settings-row" style="margin-top:8px">
+        <label>Webhook <input id="dtWebhook" type="text" placeholder="https://oapi.dingtalk.com/robot/send?access_token=xxx" style="width:520px" /></label>
+      </div>
+      <div class="settings-row">
+        <label>加签密钥（选填）<input id="dtSecret" type="text" placeholder="SECxxxxxxxxxx" style="width:320px" /></label>
+      </div>
+      <div class="settings-row">
+        <label>定时发送时间（HH:mm，逗号分隔）<input id="dtScheduleTimes" type="text" placeholder="09:00,12:00,18:00" style="width:200px" /></label>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:var(--ink-500);line-height:1.6">
+        · 消息内容：每个市场最新一次巡检记录，异常代码和异常服务器 <b><span style="color:#d93025">标红</span></b><br>
+        · 定时任务每分钟检查一次，同一时间点只触发一次<br>
+        · Webhook 在钉钉群 → 群设置 → 智能群助手 → 添加机器人 → 自定义 中获取
+      </div>
+      <div class="actions" style="justify-content:flex-end">
+        <button id="dtTestBtn" class="btn">测试发送</button>
+        <button id="saveConfigBtn2" class="btn primary">保存</button>
+        <span id="saveTip2" class="tip"></span>
+      </div>
+    </section>
+
+    <!-- 巡检 -->
+    <section class="card" id="sec-inspect">
+      <div class="card-head"><h2>执行巡检（对象存储 diff 对比）</h2></div>
+      <div class="inspect-row">
+        <div class="scope-group">
+          <span class="scope-label">分区：</span>
+          <label><input type="radio" name="zonescope" value="all" checked /> 全部分区</label>
+          <label><input type="radio" name="zonescope" value="selected" /> 指定分区</label>
+        </div>
+        <div id="zonePick" class="zone-pick" style="display:none"></div>
+        <div class="scope-group">
+          <span class="scope-label">巡检市场：</span>
+          <select id="marketScope" class="scope-select"></select>
+        </div>
+        <div class="scope-group" id="referenceServerGroup">
+          <span class="scope-label">参考机：</span>
+          <select id="referenceServer" class="scope-select" title="选择参考机（仅「参考机 diff 对比」算法使用）；不选则自动取第一台"></select>
+        </div>
+        <div class="scope-group">
+          <span class="scope-label">对比算法：</span>
+          <label><input type="radio" name="cmpalgorithm" value="majority" checked /> 少数服从多数(diff)</label>
+          <label><input type="radio" name="cmpalgorithm" value="reference" /> 参考机 diff 对比</label>
+        </div>
+        <div class="scope-group">
+          <span class="scope-label">对比方式：</span>
+          <label><input type="radio" name="cmpmode" id="cmpPerZone" value="per-zone" checked /> 单区</label>
+          <label><input type="radio" name="cmpmode" id="cmpMerged" value="merged" /> 多区</label>
+        </div>
+        <div class="scope-group" style="margin-top:8px">
+          <span class="scope-label">本地采集复查：</span>
+          <input id="runIdInput" class="scope-input" placeholder="采集批次 runId（留空=新采集）" style="width:260px" />
+          <label><input type="checkbox" id="compareOnlyChk" /> 仅对比本地采集</label>
+        </div>
+        <button id="runBtn" class="btn primary" title="直接使用本地 b2sumdata/ 目录中已同步的 b2sum 文件做跨机 diff 对比（对象存储同步请在上方手动拉取或配置定时拉取）">开始巡检</button>
+      </div>
+      <div id="progress" class="progress" style="display:none"></div>
+      <div id="dataDirNote" class="data-dir-note" style="display:none"></div>
+    </section>
+
+    <!-- 结果 -->
+    <section class="card" id="resultCard" data-anchor="sec-result" style="display:none">
+      <div class="card-head"><h2>巡检结果</h2></div>
+      <div id="summary" class="summary"></div>
+      <div id="resultDetail"></div>
+    </section>
+
+    <!-- 历史巡检 -->
+    <section class="card" id="sec-history">
+      <div class="card-head">
+        <h2>历史巡检</h2>
+        <button id="refreshHistoryBtn" class="btn sm">刷新</button>
+      </div>
+      <div id="historyList" class="history-list">
+        <div class="empty">暂无历史记录，执行一次巡检后自动保存</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 分区弹窗 -->
+  <div id="zoneModal" class="modal" style="display:none">
+    <div class="modal-box">
+      <h3>分区</h3>
+      <label>分区ID <input id="z_id" /></label>
+      <label>名称 <input id="z_name" /></label>
+      <label>网段 <input id="z_segment" type="text" placeholder="如 10.37（按 IP 前缀归区并统计台数）" /></label>
+      <div class="actions">
+        <button id="z_save" class="btn primary">保存</button>
+        <button id="z_cancel" class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 市场弹窗 -->
+  <div id="marketModal" class="modal" style="display:none">
+    <div class="modal-box">
+      <h3>市场</h3>
+      <label>代码 <input id="m_code" /></label>
+      <label>名称 <input id="m_name" /></label>
+      <label>巡检时间（HH:mm，逗号分隔，仅「按市场」模式生效，留空=不巡检）<input id="m_inspectTimes" type="text" placeholder="09:00,15:00" style="width:100%" /></label>
+      <div class="actions">
+        <button id="m_save" class="btn primary">保存</button>
+        <button id="m_cancel" class="btn">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      try {
+        var saved = localStorage.getItem('kh-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        root.setAttribute('data-theme', theme);
+      } catch (e) {}
+      var btn = document.getElementById('themeToggle');
+      if (btn) btn.onclick = function () {
+        var cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', cur);
+        try { localStorage.setItem('kh-theme', cur); } catch (e) {}
+      };
+
+      /* ---------- 侧边栏隐藏/固定（状态记忆） ---------- */
+      function isNarrowScreen() {
+        return window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+      }
+      function setSidebarHidden(hidden) {
+        // 窄屏（横向条布局）下不切换，避免顶部导航被隐藏
+        if (isNarrowScreen()) {
+          document.body.classList.remove('sidebar-hidden');
+          return;
+        }
+        document.body.classList.toggle('sidebar-hidden', hidden);
+        try { localStorage.setItem('kh-sidebar-hidden', hidden ? '1' : '0'); } catch (e) {}
+      }
+      // 启动时恢复上次状态（宽屏才生效）
+      try {
+        if (localStorage.getItem('kh-sidebar-hidden') === '1' && !isNarrowScreen()) {
+          document.body.classList.add('sidebar-hidden');
+        }
+      } catch (e) {}
+      var hideBtn = document.getElementById('sidebarHideBtn');
+      var showBtn = document.getElementById('sidebarShowBtn');
+      if (hideBtn) hideBtn.onclick = function () { setSidebarHidden(true); };
+      if (showBtn) showBtn.onclick = function () { setSidebarHidden(false); };
+      // 屏幕尺寸变化时重新校正（宽→窄：显示；窄→宽：按记忆恢复）
+      if (window.matchMedia) {
+        window.matchMedia('(max-width: 900px)').addEventListener('change', function () {
+          if (isNarrowScreen()) {
+            document.body.classList.remove('sidebar-hidden');
+          } else {
+            try {
+              if (localStorage.getItem('kh-sidebar-hidden') === '1') {
+                document.body.classList.add('sidebar-hidden');
+              }
+            } catch (e) {}
+          }
+        });
+      }
+    })();
+  </script>
+  <script src="/app.js"></script>
+</body>
+</html>

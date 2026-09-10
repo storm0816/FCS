@@ -1,0 +1,32 @@
+{
+  "zones": [
+    { "id": "zone-a", "name": "示例分区 A", "networkSegment": "10.0" }
+  ],
+  "markets": [
+    { "code": "SH", "name": "示例市场", "enabled": true }
+  ],
+  "settings": {
+    "concurrency": 5,
+    "maxCodes": 0
+  },
+  "objectStorage": {
+    "enabled": true,
+    "region": "cn-shanghai",
+    "endpoint": "tos-cn-shanghai.volces.com",
+    "bucket": "your-bucket-name",
+    "prefix": "your/prefix",
+    "accessKey": "",
+    "secretKey": "",
+    "localDir": "b2sumdata",
+    "autoSync": false,
+    "syncMode": "interval",
+    "syncIntervalMinutes": 5,
+    "syncFixedTimes": ""
+  },
+  "dingTalk": {
+    "enabled": false,
+    "webhook": "",
+    "secret": "",
+    "scheduleTimes": ""
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "file_check_system",
+  "version": "0.1.0",
+  "description": "FCS（File Check System）文件哈希一致性巡检平台",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "@volcengine/tos-sdk": "^2.9.1"
+  }
+}
