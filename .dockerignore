@@ -1,10 +1,17 @@
 .git
+.workbuddy
 .env
 .env.local
 node_modules
+agent
+fcs-agent
 b2sumdata
 inspect_data
 log
 config.json
 local-connections.json
+config.example.json
+README.md
+CHANGELOG.md
+scripts
 npm-debug.log*

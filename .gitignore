@@ -1,6 +1,7 @@
 node_modules/
 config.json
 local-connections.json
+# Agent 本地构建产物与部署包配置（可能包含 Master 地址等运行信息）
 agent/fcs-agent
 agent/fcs-agent.exe
 agent/agent.json
@@ -8,9 +9,8 @@ agent/dist/
 # 本地构建的 Agent 可执行文件（发布包使用 fcs-agent/ 目录）
 agent/fcs-agent-linux-amd64
 agent/*.exe
-/fcs-agent/fcs-agent
-/fcs-agent/fcs-agent.json
-/fcs-agent/*.log
+# 本地 Agent 部署包；只在目标服务器/本机保留，不提交版本库
+/fcs-agent/
 .workbuddy/
 server.log
 *.log
