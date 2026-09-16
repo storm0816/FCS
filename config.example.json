@@ -1,32 +1,18 @@
 {
-  "zones": [
-    { "id": "zone-a", "name": "示例分区 A", "networkSegment": "10.0" }
-  ],
-  "markets": [
-    { "code": "SH", "name": "示例市场", "enabled": true }
-  ],
-  "settings": {
-    "concurrency": 5,
-    "maxCodes": 0
+  "mysql": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "fcs",
+    "password": "change-me",
+    "database": "yangjian_fcs",
+    "poolSize": 10,
+    "timeout": 5000
   },
-  "objectStorage": {
-    "enabled": true,
-    "region": "cn-shanghai",
-    "endpoint": "tos-cn-shanghai.volces.com",
-    "bucket": "your-bucket-name",
-    "prefix": "your/prefix",
-    "accessKey": "",
-    "secretKey": "",
-    "localDir": "b2sumdata",
-    "autoSync": false,
-    "syncMode": "interval",
-    "syncIntervalMinutes": 5,
-    "syncFixedTimes": ""
-  },
-  "dingTalk": {
+  "redis": {
     "enabled": false,
-    "webhook": "",
-    "secret": "",
-    "scheduleTimes": ""
+    "host": "127.0.0.1",
+    "port": 6379,
+    "password": "",
+    "db": 0
   }
 }

@@ -1,14 +1,8 @@
 /**
- * 对象存储数据源模块（TOS SDK @volcengine/tos-sdk）。
+ * 哈希文件解析与兼容工具。
  *
- * 设计目标：把「哈希采集来源」从 SSH 换成对象存储——巡检时用 TOS SDK
- * 直接把对象存储里的 b2sum 文件拉到本地 b2sumdata/ 目录，再复用现有的
- * computeMajority / analyze / computeReferenceCompare 对比算法。
- *
- * 密钥配置：
- *   - AccessKey / SecretKey 直接配置在 config.json 的 objectStorage 节点中
- *     （accessKey / secretKey 字段），不再依赖 tosutil 配置文件或环境变量。
- *   - 本模块持有密钥仅用于初始化 TosClient，不外泄、不落日志。
+ * 当前传输统一由 Agent 通过 tosutil 直接完成；Master 仅使用本模块中的
+ * 文件名、哈希内容和分区解析逻辑来兼容历史巡检结果。
  */
 
 const fs = require('fs');
@@ -23,14 +17,6 @@ const path = require('path');
 const PATH_PATTERN = '{ip}-{market}-NIG.b2sum';
 const FILE_FORMAT = 'b2sum';
 const CODE_SUFFIX = '.NIG';
-
-/**
- * 延迟加载 TOS SDK：仅在真正需要访问对象存储时才 require，
- * 保证测试 / 未启用对象存储的场景不依赖该包。
- */
-function loadTosSdk() {
-  return require('@volcengine/tos-sdk');
-}
 
 /**
  * 按 IP 网段把服务器(IP)归入分区。
@@ -53,40 +39,6 @@ function matchZoneBySegment(ip, zones) {
     }
   }
   return best;
-}
-
-/**
- * 统计本地 b2sumdata 目录中已同步的服务器（按 <ip>-<market>-NIG.b2sum 去重 IP），
- * 并按分区网段分组计数，用于分区配置页展示「台数」。
- *
- * @param {object} cfg 完整配置
- * @returns {{ total:number, zones: {[zoneId:string]: {segment:string, count:number, servers:string[]}}, unmapped: string[] }}
- */
-function countLocalServers(cfg) {
-  const os = (cfg && cfg.objectStorage) || {};
-  const localDir = path.resolve(__dirname, '..', os.localDir || 'b2sumdata');
-  const ips = new Set();
-  if (fs.existsSync(localDir)) {
-    for (const f of fs.readdirSync(localDir)) {
-      const info = parseObjectKey(f, '', PATH_PATTERN);
-      if (info && info.serverId) ips.add(info.serverId);
-    }
-  }
-  const zones = cfg.zones || [];
-  const result = { total: ips.size, zones: {}, unmapped: [] };
-  for (const z of zones) {
-    result.zones[z.id] = { segment: z.networkSegment || '', count: 0, servers: [] };
-  }
-  for (const ip of ips) {
-    const zoneId = matchZoneBySegment(ip, zones);
-    if (zoneId && result.zones[zoneId]) {
-      result.zones[zoneId].count++;
-      result.zones[zoneId].servers.push(ip);
-    } else {
-      result.unmapped.push(ip);
-    }
-  }
-  return result;
 }
 
 /**
@@ -119,31 +71,6 @@ function selectMarketsByCoverage(marketServers, allServerIds) {
   full.sort();
   partial.sort((a, b) => a.market.localeCompare(b.market));
   return { totalServers: all.length, full, partial };
-}
-
-/**
- * 用 config.objectStorage 里的密钥创建 TosClient 实例。
- * @param {object} cfg 完整配置（读 cfg.objectStorage）
- * @returns {TosClient}
- */
-function createTosClient(cfg) {
-  const os = (cfg && cfg.objectStorage) || {};
-  if (!os.accessKey || !os.secretKey) {
-    throw new Error('对象存储未配置密钥：请在 config.json 的 objectStorage 中填写 accessKey 与 secretKey');
-  }
-  if (!os.region) {
-    throw new Error('对象存储未配置 region：请在 config.json 的 objectStorage 中填写 region（如 cn-shanghai）');
-  }
-  const { TosClient } = loadTosSdk();
-  return new TosClient({
-    accessKeyId: os.accessKey,
-    accessKeySecret: os.secretKey,
-    region: os.region,
-    endpoint: os.endpoint || `tos-${os.region}.volces.com`,
-    connectionTimeout: os.connectionTimeout || 10000,
-    requestTimeout: os.requestTimeout || 120000,
-    maxRetryCount: os.maxRetryCount != null ? os.maxRetryCount : 3
-  });
 }
 
 /**
@@ -427,14 +354,9 @@ module.exports = {
   FILE_FORMAT,
   CODE_SUFFIX,
   matchZoneBySegment,
-  countLocalServers,
   selectMarketsByCoverage,
-  createTosClient,
   resolveB2sumPath,
   parseObjectKey,
   parseB2sumContent,
-  readObjectStorageForComparison,
-  discoverServers,
-  syncObjectStorage,
-  listAllObjects
+  readObjectStorageForComparison
 };

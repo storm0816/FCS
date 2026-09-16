@@ -1,0 +1,7 @@
+{
+  "masterUrl": "http://10.15.45.156:3000",
+  "zone": "",
+  "innerIp": "",
+  "outerIp": "",
+  "heartbeatSeconds": 10
+}

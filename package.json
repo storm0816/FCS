@@ -6,12 +6,15 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js"
+    "check": "node scripts/check-syntax.js",
+    "test:smoke": "node scripts/smoke-test.js"
   },
   "engines": {
     "node": ">=16"
   },
   "dependencies": {
-    "@volcengine/tos-sdk": "^2.9.1"
+    "@volcengine/tos-sdk": "^2.9.1",
+    "ldapjs": "^3.0.7",
+    "mysql2": "^3.24.4"
   }
 }

@@ -1,0 +1,14 @@
+[Unit]
+Description=FCS Hash Inspection Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/fcs-agent/fcs-agent --config /opt/fcs-agent/agent.json
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target

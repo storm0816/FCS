@@ -1,5 +1,17 @@
 node_modules/
 config.json
+local-connections.json
+agent/fcs-agent
+agent/fcs-agent.exe
+agent/agent.json
+agent/dist/
+# 本地构建的 Agent 可执行文件（发布包使用 fcs-agent/ 目录）
+agent/fcs-agent-linux-amd64
+agent/*.exe
+/fcs-agent/fcs-agent
+/fcs-agent/fcs-agent.json
+/fcs-agent/*.log
+.workbuddy/
 server.log
 *.log
 log/

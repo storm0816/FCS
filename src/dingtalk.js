@@ -79,13 +79,11 @@ function sendMarkdown(cfg, title, markdownText) {
 
 /**
  * 构造钉钉 Markdown 巡检报告
- * @param {object} historyMod require('./history')
- * @param {object} configMod require('./config') 用于映射市场代码→中文名
+ * @param {object} hist MySQL 巡检历史概要
+ * @param {object} cfg 运行时配置，用于映射市场代码→中文名
  * @returns {{title: string, markdown: string, marketCount: number, anomalyCount: number}}
  */
-function buildInspectionReport(historyMod, configMod) {
-  const hist = historyMod.listHistory();
-  const cfg = configMod.loadConfig();
+function buildInspectionReport(hist, cfg) {
   const marketNames = {};
   for (const m of (cfg.markets || [])) {
     marketNames[m.code] = m.name || m.code;

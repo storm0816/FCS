@@ -1,0 +1,16 @@
+name: fcs
+
+services:
+  fcs:
+    build: .
+    container_name: fcs
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./config.json:/app/config.json
+      - ./b2sumdata:/app/b2sumdata
+      - ./inspect_data:/app/inspect_data
+      - ./log:/app/log
+    restart: unless-stopped

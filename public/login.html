@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FCS 登录</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="login-brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6" fill="#fff" stroke="none"/>
+          <path d="M7.4 11.4l1.2 1.2 2.2-2.4" stroke="#fff"/><circle cx="16" cy="18" r="1.6" fill="#fff" stroke="none"/>
+        </svg>
+      </span>
+      <h1>FCS</h1>
+      <p>对象存储哈希一致性巡检</p>
+    </div>
+    <section class="login-panel" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">FCS 登录</h2>
+      <form id="loginForm" novalidate>
+        <label for="loginUsername">用户名</label>
+        <input id="loginUsername" name="username" autocomplete="username" required />
+        <label for="loginPassword">密码</label>
+        <div class="login-password-wrap">
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" required />
+          <button id="togglePassword" type="button" class="password-toggle" aria-label="显示密码" title="显示密码">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>
+          </button>
+        </div>
+        <div id="loginMfaRow" hidden><label for="loginMfaToken">MFA 验证码</label><input id="loginMfaToken" name="mfaToken" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="请输入 6 位验证码" /></div>
+        <div id="loginMessage" class="login-message" role="alert" aria-live="polite"></div>
+        <button type="submit" class="btn primary login-submit">登录</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var form = document.getElementById('loginForm');
+      var username = document.getElementById('loginUsername');
+      var password = document.getElementById('loginPassword');
+      var mfaToken = document.getElementById('loginMfaToken');
+      var mfaRow = document.getElementById('loginMfaRow');
+      var message = document.getElementById('loginMessage');
+      var toggle = document.getElementById('togglePassword');
+      if (toggle) toggle.onclick = function () {
+        var visible = password.type === 'text';
+        password.type = visible ? 'password' : 'text';
+        toggle.setAttribute('aria-label', visible ? '显示密码' : '隐藏密码');
+        toggle.title = visible ? '显示密码' : '隐藏密码';
+      };
+      form.onsubmit = async function (event) {
+        event.preventDefault();
+        message.textContent = '';
+        try {
+          var response = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username.value.trim(), password: password.value, mfaToken: mfaToken.value.trim() }) });
+          var result = await response.json();
+          if (result && result.mfaRequired) { mfaRow.hidden = false; mfaToken.focus(); }
+          if (!response.ok || !result.ok) throw new Error(result.error || '用户名或密码错误');
+          window.location.replace('/' + (window.location.hash || ''));
+          return;
+        } catch (e) {
+        message.textContent = e.message || '用户名或密码错误';
+        password.focus();
+        }
+      };
+    })();
+  </script>
+</body>
+</html>

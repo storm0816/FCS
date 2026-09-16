@@ -1,0 +1,10 @@
+.git
+.env
+.env.local
+node_modules
+b2sumdata
+inspect_data
+log
+config.json
+local-connections.json
+npm-debug.log*

@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FCS · File Check System</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style.css?v=agent-picker-layout" />
 </head>
 <body>
   <!-- ===== 左侧垂直侧边栏导航 ===== -->
   <aside class="sidebar" id="sidebar">
-    <button id="sidebarHideBtn" class="brand-icon-btn" aria-label="隐藏侧边栏" title="隐藏侧边栏">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M13 10l3 2-3 2"/>
-      </svg>
-    </button>
     <div class="sidebar-brand">
       <span class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -38,30 +33,41 @@
         <div class="nav-parent" data-toggle="inspect">
           <span class="nav-parent-label">
             <svg class="nav-parent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M7 14v-3M12 14V7M17 14v-5"/><path d="M8 21h8M12 17v4"/></svg>
-            巡检
+            巡检管理
           </span>
           <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="nav-children" data-children="inspect">
-          <a class="nav-item" href="#sec-inspect"    data-target="sec-inspect"><span class="nav-text">执行巡检</span></a>
+          <a class="nav-item" href="#sec-inspect"    data-target="sec-inspect"><span class="nav-text">发起巡检</span></a>
+          <a class="nav-item" href="#sec-inspection-plans" data-target="sec-inspection-plans"><span class="nav-text">巡检方案</span></a>
+          <a class="nav-item" href="#sec-inspection-schedules" data-target="sec-inspection-schedules"><span class="nav-text">定时巡检</span></a>
           <a class="nav-item" href="#resultCard"     data-target="resultCard"><span class="nav-text">巡检结果</span></a>
-          <a class="nav-item" href="#sec-history"    data-target="sec-history"><span class="nav-text">历史巡检</span></a>
+          <a class="nav-item" href="#sec-history"    data-target="sec-history"><span class="nav-text">巡检历史</span></a>
+          <a class="nav-item" href="#sec-releases" data-target="sec-releases" data-permission="release.manage"><span class="nav-text">文件同步</span></a>
+        </div>
+      </div>
+      <div class="nav-group" data-group="resources">
+        <div class="nav-parent" data-toggle="resources"><span class="nav-parent-label"><span class="nav-parent-icon">◈</span>资源管理</span><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="nav-children" data-children="resources">
+          <a class="nav-item" href="#sec-agents" data-target="sec-agents"><span class="nav-text">Agent 管理</span></a>
+          <a class="nav-item" href="#sec-business-systems" data-target="sec-business-systems"><span class="nav-text">业务系统</span></a>
+          <a class="nav-item" href="#sec-datasets" data-target="sec-datasets"><span class="nav-text">数据集管理</span></a>
+          <a class="nav-item" href="#sec-zones" data-target="sec-zones"><span class="nav-text">分区管理</span></a>
+          <a class="nav-item" href="#sec-agent-tags" data-target="sec-agent-tags"><span class="nav-text">标签管理</span></a>
         </div>
       </div>
       <div class="nav-group" data-group="settings">
         <div class="nav-parent" data-toggle="settings">
           <span class="nav-parent-label">
             <svg class="nav-parent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            设置
+            系统管理
           </span>
           <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="nav-children" data-children="settings">
-          <a class="nav-item" href="#sec-zones"      data-target="sec-zones"><span class="nav-text">分区设置</span></a>
-          <a class="nav-item" href="#sec-markets"    data-target="sec-markets"><span class="nav-text">市场设置</span></a>
-          <a class="nav-item" href="#sec-storage"    data-target="sec-storage"><span class="nav-text">对象存储设置</span></a>
-          <a class="nav-item" href="#sec-settings"   data-target="sec-settings"><span class="nav-text">巡检设置</span></a>
-          <a class="nav-item" href="#sec-dingtalk"   data-target="sec-dingtalk"><span class="nav-text">钉钉通知</span></a>
+          <a class="nav-item" href="#sec-system-settings" data-target="sec-system-settings" data-permission="system.read"><span class="nav-text">系统设置</span></a>
+          <a class="nav-item" href="#sec-user-settings" data-target="sec-user-settings" data-permission="user.manage"><span class="nav-text">用户与权限</span></a>
+          <a class="nav-item" href="#sec-dingtalk"   data-target="sec-dingtalk"><span class="nav-text">通知设置</span></a>
         </div>
       </div>
     </nav>
@@ -84,14 +90,67 @@
   </button>
 
   <main class="content" id="content">
+    <header class="topbar" id="appHeader">
+      <button id="sidebarHideBtn" class="header-icon-btn" aria-label="折叠侧边栏" title="折叠侧边栏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="M13 10l3 2-3 2"/>
+        </svg>
+      </button>
+      <div class="header-actions">
+        <button id="headerRefreshBtn" class="header-icon-btn" aria-label="刷新页面" title="刷新">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 5v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 19v-4h-4"/></svg>
+        </button>
+        <button id="fullscreenBtn" class="header-icon-btn" aria-label="进入全屏" title="全屏">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M21 16v3a2 2 0 0 1-2 2h-3"/></svg>
+        </button>
+        <div class="header-user-wrap">
+          <button id="headerUserBtn" class="header-user" aria-label="当前登录用户" title="用户菜单" aria-expanded="false">
+            <span class="header-user-avatar" aria-hidden="true">A</span>
+            <span id="headerUserName">当前用户</span>
+          </button>
+          <div id="headerUserMenu" class="user-menu" hidden>
+            <button id="logoutBtn" type="button">退出登录</button>
+          </div>
+        </div>
+      </div>
+    </header>
     <!-- 仪表盘 -->
     <section class="card" id="sec-dashboard">
       <div class="card-head">
         <h2>仪表盘</h2>
-        <button id="refreshDashBtn" class="btn">刷新</button>
+        <div class="dash-head-actions">
+          <label class="dash-range-label">统计范围
+            <select id="dashRange" aria-label="仪表盘统计范围">
+              <option value="7">最近 7 天</option>
+              <option value="30">最近 30 天</option>
+            </select>
+          </label>
+          <button id="refreshDashBtn" class="btn">刷新</button>
+        </div>
       </div>
       <div id="dashSummary" class="dash-stats"></div>
-      <div id="dashMarkets" class="dash-grid"></div>
+      <div class="dashboard-panels">
+        <section class="dashboard-panel dashboard-trend-panel">
+          <div class="dashboard-panel-head"><h3>巡检趋势</h3><span id="dashTrendHint" class="tip"></span></div>
+          <div id="dashTrend" class="dashboard-chart"></div>
+        </section>
+        <section class="dashboard-panel">
+          <div class="dashboard-panel-head"><h3>Agent 状态</h3><span id="dashAgentHint" class="tip"></span></div>
+          <div id="dashAgents" class="dash-agent-list"></div>
+        </section>
+        <section class="dashboard-panel">
+          <div class="dashboard-panel-head"><h3>市场健康度</h3><span class="tip">异常最多前 5 个</span></div>
+          <div id="dashMarkets" class="dash-market-bars"></div>
+        </section>
+        <section class="dashboard-panel">
+          <div class="dashboard-panel-head"><h3>发布 / 下载</h3><span id="dashReleaseHint" class="tip"></span></div>
+          <div id="dashRelease" class="dash-release-grid"></div>
+        </section>
+      </div>
+      <section class="dashboard-panel dashboard-anomaly-panel">
+        <div class="dashboard-panel-head"><h3>最近异常巡检</h3><a href="#sec-history" class="dash-link" data-target="sec-history">查看历史巡检</a></div>
+        <div class="dash-table-wrap"><table class="tbl dash-anomaly-table"><thead><tr><th>完成时间</th><th>市场</th><th>参考机</th><th>异常服务器</th><th>异常代码</th><th>操作</th></tr></thead><tbody id="dashAnomalies"></tbody></table></div>
+      </section>
     </section>
 
     <!-- 分区配置 -->
@@ -106,16 +165,22 @@
       </table>
     </section>
 
-    <!-- 市场配置 -->
-    <section class="card" id="sec-markets">
-      <div class="card-head">
-        <h2>市场设置</h2>
-        <button id="addMarketBtn" class="btn">+ 新增市场</button>
-      </div>
-      <table id="marketTable" class="tbl">
-        <thead><tr><th>启用</th><th>代码</th><th>名称</th><th>巡检时间</th><th>操作</th></tr></thead>
-        <tbody></tbody>
-      </table>
+    <section class="card" id="sec-agent-tags">
+      <div class="card-head"><h2>Agent 标签设置</h2><button id="addTagPartitionBtn" class="btn primary">+ 新增标签</button></div>
+      <p class="settings-note">标签用于描述 Agent 的环境、角色和用途；与物理分区、业务系统完全独立。例如：生产环境、灾备节点、同步源。</p>
+      <table id="tagPartitionTable" class="tbl"><thead><tr><th>标识</th><th>名称</th><th>标签条件</th><th>匹配 Agent</th><th>状态</th><th>说明</th><th>操作</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="card" id="sec-business-systems">
+      <div class="card-head"><h2>业务系统</h2><button id="addBusinessSystemBtn" class="btn primary">+ 新增业务系统</button></div>
+      <p class="settings-note">业务系统用于归类文件巡检与同步对象；现有行情市场已自动迁移到“行情系统”。</p>
+      <table class="tbl" id="businessSystemTable"><thead><tr><th>代码</th><th>名称</th><th>负责人</th><th>数据集</th><th>状态</th><th>说明</th><th>操作</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="card" id="sec-datasets">
+      <div class="card-head"><h2>数据集管理</h2><div class="user-toolbar"><select id="datasetSystemFilter" class="scope-select" aria-label="按业务系统筛选数据集"></select><button id="addDatasetBtn" class="btn primary">+ 新增数据集</button></div></div>
+      <p class="settings-note">数据集是可独立巡检、发布和同步的目录或文件集合。现有市场保留不变，并作为“行情系统”中的兼容数据集。</p>
+      <table class="tbl" id="datasetTable"><thead><tr><th>业务系统</th><th>代码</th><th>名称</th><th>源目录</th><th>文件规则</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table>
     </section>
 
     <!-- 对象存储配置 -->
@@ -131,65 +196,23 @@
         <label>Endpoint <input id="osEndpoint" type="text" placeholder="tos-cn-shanghai.volces.com" /></label>
         <label>Bucket <input id="osBucket" type="text" placeholder="mobilefile" /></label>
       </div>
+      <div class="settings-row"><label>Prefix <input id="osPrefix" type="text" placeholder="file/b2sumkline" /></label></div>
       <div class="settings-row">
-        <label>Prefix <input id="osPrefix" type="text" placeholder="file/b2sumkline" /></label>
-        <label>本地目录 <input id="osLocalDir" type="text" placeholder="b2sumdata" /></label>
-      </div>
-      <div class="settings-row">
-        <label>AccessKey <input id="osAccessKey" type="text" placeholder="AKTP..." /></label>
-        <label>SecretKey <input id="osSecretKey" type="password" placeholder="..." /></label>
-      </div>
-      <div class="settings-row" style="margin-top:8px">
-        <label><input type="checkbox" id="osAutoSync" /> 定时自动拉取</label>
-        <label>模式
-          <select id="osSyncMode" style="width:120px">
-            <option value="interval">间隔（每 N 分钟）</option>
-            <option value="fixed">时间点（每天 HH:mm）</option>
-          </select>
-        </label>
-        <label id="osSyncIntervalLabel">间隔（分钟）<input id="osSyncInterval" type="number" min="1" value="5" style="width:72px" /></label>
-        <label id="osSyncFixedLabel">时间点 <input id="osSyncFixedTimes" type="text" placeholder="如 09:00,11:00,18:00" style="width:200px" /></label>
-      </div>
-      <div class="settings-row">
-        <span id="autoSyncStatus" class="tip"></span>
+        <label>AccessKey <input id="osAccessKey" type="text" placeholder="留空保持已保存的值" autocomplete="off" /></label>
+        <label>SecretKey <input id="osSecretKey" type="password" placeholder="留空保持已保存的值" autocomplete="new-password" /></label>
       </div>
       <div class="actions">
         <button id="saveOsBtn" class="btn primary">保存对象存储配置</button>
-        <button id="testOsBtn" class="btn ghost">测试连接 / 发现服务器</button>
-        <button id="syncOsBtn" class="btn ghost" title="立即从对象存储拉取最新 b2sum 文件到本地 b2sumdata/">立即拉取文件</button>
         <span id="osTip" class="tip"></span>
       </div>
-      <div id="osDiscoverResult" class="card-section" style="display:none;margin-top:12px"></div>
-    </section>
-
-    <!-- 巡检设置 -->
-    <section class="card" id="sec-settings">
-      <div class="card-head"><h2><span class="step">04</span>巡检设置</h2></div>
-      <div class="settings-row">
-        <label>全局并发上限 <input type="number" id="concurrency" min="1" max="50" value="4" style="width:64px" /></label>
-      </div>
-      <div class="settings-row" style="margin-top:12px">
-        <label><input type="checkbox" id="inspectSchedEnabled" /> 定时巡检</label>
-        <label>模式
-          <select id="inspectSchedMode" style="width:120px">
-            <option value="global" selected>全局（所有市场）</option>
-            <option value="per-market">按市场</option>
-          </select>
-        </label>
-      </div>
-      <div id="schedGlobalRow" class="settings-row" style="margin-top:4px">
-        <label>巡检时间点（HH:mm，逗号分隔，所有市场统一时间）<input id="inspectSchedTimes" type="text" placeholder="09:00,15:00" style="width:200px" /></label>
-      </div>
-      <div id="schedPerMarketBox" class="card-section" style="display:none;margin-top:12px">
-        <div style="font-weight:600;margin-bottom:6px">按市场设置巡检时间（留空=该市场不定时巡检）</div>
-        <table class="tbl" id="schedMarketTbl">
-          <thead><tr><th>启用</th><th>市场代码</th><th>名称</th><th>巡检时间（HH:mm，逗号分隔）</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="actions" style="justify-content:flex-end">
-        <button id="saveConfigBtn" class="btn primary">保存</button>
-        <span id="saveTip" class="tip"></span>
+      <div class="system-submodule" id="ldapSettings">
+        <div class="system-subtitle">LDAP 登录</div>
+        <div class="settings-row"><label><input type="checkbox" id="ldapEnabled" /> 启用 LDAP 登录</label><label>连接超时（毫秒） <input id="ldapTimeout" type="number" min="1000" value="5000" /></label></div>
+        <div class="settings-row"><label>LDAP 地址（逗号分隔） <input id="ldapServers" type="text" placeholder="ldap://server:389" /></label><label>查询基准 <input id="ldapSearchBase" type="text" placeholder="ou=people,dc=example,dc=com" /></label></div>
+        <div class="settings-row"><label>服务账号 <input id="ldapBindUser" type="text" /></label><label>服务账号密码 <input id="ldapBindPassword" type="password" placeholder="留空保持不变" /></label></div>
+        <div class="settings-row"><label>用户属性 <input id="ldapUserAttribute" type="text" value="sAMAccountName" /></label><label>绑定模板 <input id="ldapBindTemplate" type="text" value="%s" /></label></div>
+        <div class="settings-row"><label>StartTLS <select id="ldapStartTls"><option value="off">关闭</option><option value="on">开启</option></select></label><label>证书校验 <select id="ldapTlsVerify"><option value="on">开启</option><option value="off">关闭</option></select></label></div>
+        <div class="actions"><button id="saveLdapBtn" class="btn primary">保存 LDAP 配置</button><span id="ldapTip" class="tip"></span></div>
       </div>
     </section>
 
@@ -199,21 +222,21 @@
       <div class="settings-row">
         <label><input type="checkbox" id="dtEnabled" /> 启用钉钉通知</label>
       </div>
-      <div class="settings-row" style="margin-top:8px">
-        <label>Webhook <input id="dtWebhook" type="text" placeholder="https://oapi.dingtalk.com/robot/send?access_token=xxx" style="width:520px" /></label>
+      <div class="settings-row spaced">
+        <label>Webhook <input id="dtWebhook" type="text" placeholder="留空保持已保存的 Webhook" /></label>
       </div>
       <div class="settings-row">
-        <label>加签密钥（选填）<input id="dtSecret" type="text" placeholder="SECxxxxxxxxxx" style="width:320px" /></label>
+        <label>加签密钥（选填）<input id="dtSecret" type="password" placeholder="留空保持已保存的密钥" autocomplete="new-password" /></label>
       </div>
       <div class="settings-row">
-        <label>定时发送时间（HH:mm，逗号分隔）<input id="dtScheduleTimes" type="text" placeholder="09:00,12:00,18:00" style="width:200px" /></label>
+        <label>定时发送时间（HH:mm，逗号分隔）<input id="dtScheduleTimes" type="text" placeholder="09:00,12:00,18:00" /></label>
       </div>
-      <div style="margin-top:8px;font-size:12px;color:var(--ink-500);line-height:1.6">
+      <div class="settings-note">
         · 消息内容：每个市场最新一次巡检记录，异常代码和异常服务器 <b><span style="color:#d93025">标红</span></b><br>
         · 定时任务每分钟检查一次，同一时间点只触发一次<br>
         · Webhook 在钉钉群 → 群设置 → 智能群助手 → 添加机器人 → 自定义 中获取
       </div>
-      <div class="actions" style="justify-content:flex-end">
+      <div class="actions">
         <button id="dtTestBtn" class="btn">测试发送</button>
         <button id="saveConfigBtn2" class="btn primary">保存</button>
         <span id="saveTip2" class="tip"></span>
@@ -221,47 +244,105 @@
     </section>
 
     <!-- 巡检 -->
+    <section class="card" id="sec-user-settings">
+      <div class="card-head"><h2>用户设置</h2><div class="user-toolbar"><input id="userQuery" class="scope-input" type="search" placeholder="搜索用户名或显示名称" aria-label="搜索用户" /><button id="addUserOpenBtn" class="btn primary">+ 新增用户</button></div></div>
+      <div id="userFormPanel" class="user-form-panel" hidden>
+        <div class="settings-row"><label>用户名 <input id="userSettingName" placeholder="新用户" /></label><label>显示名称 <input id="userSettingDisplay" placeholder="显示名称" /></label><label>密码 <input id="userSettingPassword" type="password" placeholder="登录密码" /></label><label><input id="userSettingEnabled" type="checkbox" checked /> 启用</label><button id="addUserBtn" class="btn primary">新增用户</button><button id="cancelUserEditBtn" class="btn" hidden>取消编辑</button></div>
+      </div>
+      <table class="tbl" id="userTable"><thead><tr><th>用户名</th><th>显示名称</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="card" id="sec-releases">
+      <div class="card-head"><h2>发布/下载管理</h2><button id="refreshReleaseBtn" class="btn">刷新</button></div>
+      <div class="settings-row"><div class="scope-group"><span class="scope-label">业务数据集/市场</span><div id="releaseMarketCombo" class="market-combo"><button id="releaseMarketButton" class="scope-select market-combo-button" type="button" aria-expanded="false">请选择数据集</button><div id="releaseMarketPanel" class="market-combo-panel" hidden><input id="releaseMarketSearch" class="market-combo-search" type="search" placeholder="搜索业务数据集或市场代码" aria-label="搜索业务数据集或市场代码" /><div id="releaseMarketOptions" class="market-combo-options"></div></div><input id="releaseMarket" type="hidden" value="" /></div></div><div class="scope-group"><span class="scope-label">发布源 Agent</span><div id="releaseSourceCombo" class="market-combo"><button id="releaseSourceButton" class="scope-select market-combo-button" type="button" aria-expanded="false">请选择发布源 Agent</button><div id="releaseSourcePanel" class="market-combo-panel" hidden><input id="releaseSourceSearch" class="market-combo-search" type="search" placeholder="搜索 Agent" aria-label="搜索发布源 Agent" /><div id="releaseSourceOptions" class="market-combo-options"></div></div><input id="releaseSource" type="hidden" value="" /></div></div><div class="scope-group"><span class="scope-label">目标 Agent</span><div id="releaseTargetCombo" class="market-combo"><button id="releaseTargetButton" class="scope-select market-combo-button" type="button">请选择目标 Agent</button><div id="releaseTargetPanel" class="market-combo-panel" hidden><button id="releaseTargetAll" type="button" class="market-combo-option">全选/取消全选</button><div id="releaseTargetOptions" class="market-combo-options"></div></div></div></div><button id="createReleaseBtn" class="btn primary">创建发布任务</button></div>
+      <div id="releaseTip" class="tip"></div>
+      <table class="tbl" id="releaseTable"><thead><tr><th>发布时间</th><th>市场</th><th>发布源</th><th>发布源状态/耗时</th><th>状态</th><th>目标 Agent 状态/耗时</th><th>压缩包大小</th><th>SHA-256</th></tr></thead><tbody></tbody></table>
+    </section>
+
     <section class="card" id="sec-inspect">
-      <div class="card-head"><h2>执行巡检（对象存储 diff 对比）</h2></div>
-      <div class="inspect-row">
-        <div class="scope-group">
-          <span class="scope-label">分区：</span>
-          <label><input type="radio" name="zonescope" value="all" checked /> 全部分区</label>
-          <label><input type="radio" name="zonescope" value="selected" /> 指定分区</label>
-        </div>
-        <div id="zonePick" class="zone-pick" style="display:none"></div>
-        <div class="scope-group">
-          <span class="scope-label">巡检市场：</span>
-          <select id="marketScope" class="scope-select"></select>
-        </div>
-        <div class="scope-group" id="referenceServerGroup">
-          <span class="scope-label">参考机：</span>
-          <select id="referenceServer" class="scope-select" title="选择参考机（仅「参考机 diff 对比」算法使用）；不选则自动取第一台"></select>
-        </div>
-        <div class="scope-group">
-          <span class="scope-label">对比算法：</span>
-          <label><input type="radio" name="cmpalgorithm" value="majority" checked /> 少数服从多数(diff)</label>
-          <label><input type="radio" name="cmpalgorithm" value="reference" /> 参考机 diff 对比</label>
-        </div>
-        <div class="scope-group">
-          <span class="scope-label">对比方式：</span>
-          <label><input type="radio" name="cmpmode" id="cmpPerZone" value="per-zone" checked /> 单区</label>
-          <label><input type="radio" name="cmpmode" id="cmpMerged" value="merged" /> 多区</label>
-        </div>
-        <div class="scope-group" style="margin-top:8px">
-          <span class="scope-label">本地采集复查：</span>
-          <input id="runIdInput" class="scope-input" placeholder="采集批次 runId（留空=新采集）" style="width:260px" />
-          <label><input type="checkbox" id="compareOnlyChk" /> 仅对比本地采集</label>
-        </div>
-        <button id="runBtn" class="btn primary" title="直接使用本地 b2sumdata/ 目录中已同步的 b2sum 文件做跨机 diff 对比（对象存储同步请在上方手动拉取或配置定时拉取）">开始巡检</button>
+      <div class="card-head inspect-card-head"><div><h2>执行巡检（Agent 哈希 diff 对比）</h2><p>按顺序选择巡检对象和参与 Agent，确认范围后再开始巡检。</p></div><div class="inspect-plan-toolbar"><label>巡检方案 <select id="inspectPlanSelect" class="scope-select"><option value="">不使用方案</option></select></label><button id="saveInspectPlanBtn" class="btn">另存为方案</button></div></div>
+      <div class="inspect-wizard">
+        <section class="inspect-step" aria-labelledby="inspectStepObject">
+          <div class="inspect-step-head"><span>1</span><div><h3 id="inspectStepObject">选择巡检对象</h3><p>先选择业务系统，再选择需要校验的具体数据集。</p></div></div>
+          <div class="inspect-fields" id="businessInspectGroup">
+            <label class="inspect-field"><span>业务系统</span><select id="inspectSystem" class="scope-select" aria-label="选择业务系统"></select></label>
+            <label class="inspect-field"><span>业务数据集</span><select id="inspectDataset" class="scope-select" aria-label="选择数据集"></select></label>
+          </div>
+          <div id="inspectDatasetSummary" class="inspect-context-note"></div>
+        </section>
+
+        <section class="inspect-step" aria-labelledby="inspectStepAgents">
+          <div class="inspect-step-head"><span>2</span><div><h3 id="inspectStepAgents">选择参与 Agent</h3><p>系统只会列出在线、已关联当前业务和数据集的 Agent，可再按分区、标签或手工缩小范围。</p></div></div>
+          <div class="inspect-fields">
+            <div class="inspect-field inspect-field-wide">
+              <span>物理分区（可选）</span>
+              <div class="scope-group">
+                <label><input type="radio" name="zonescope" value="all" checked /> 全部分区</label>
+                <label><input type="radio" name="zonescope" value="selected" /> 指定分区</label>
+              </div>
+              <div id="zonePick" class="zone-pick" style="display:none"></div>
+            </div>
+            <label class="inspect-field"><span>Agent 选择方式</span><select id="inspectAgentMode" class="scope-select" aria-label="选择参与巡检的 Agent 范围"><option value="all">全部候选 Agent</option><option value="tag">按标签筛选</option><option value="manual">手工选择</option></select></label>
+            <label class="inspect-field scope-group"><span>Agent 标签</span><select id="inspectTagPartition" class="scope-select" aria-label="按 Agent 标签筛选"></select></label>
+          </div>
+          <div id="inspectAgentPick" class="agent-pick" hidden></div>
+          <div class="inspect-agent-preview">
+            <div class="inspect-preview-head"><strong>最终参与 Agent</strong><span id="inspectAgentCount">0 台</span></div>
+            <div id="inspectAgentPreview" class="inspect-agent-list"><div class="empty">请选择业务系统和数据集</div></div>
+          </div>
+        </section>
+
+        <section class="inspect-step" aria-labelledby="inspectStepCompare">
+          <div class="inspect-step-head"><span>3</span><div><h3 id="inspectStepCompare">设置对比并执行</h3><p>默认使用多数结果作为正确基准；只有指定参考 Agent 时才需要切换对比算法。</p></div></div>
+          <div class="inspect-fields">
+            <div class="inspect-field inspect-field-wide"><span>对比算法</span><div class="scope-group"><label><input type="radio" name="cmpalgorithm" value="majority" checked /> 少数服从多数（推荐）</label><label><input type="radio" name="cmpalgorithm" value="reference" /> 指定参考 Agent</label></div></div>
+            <label class="inspect-field scope-group" id="referenceServerGroup"><span>参考 Agent</span><select id="referenceServer" class="scope-select" title="仅指定参考 Agent 对比时使用；不选则自动取第一台"></select></label>
+            <div class="inspect-field"><span>分区对比方式</span><div class="scope-group"><label><input type="radio" name="cmpmode" id="cmpPerZone" value="per-zone" checked /> 分区内对比</label><label><input type="radio" name="cmpmode" id="cmpMerged" value="merged" /> 跨分区对比</label></div></div>
+          </div>
+          <div class="inspect-submit-row"><div id="inspectGuard" class="inspect-guard" role="status"></div><button id="runBtn" class="btn primary" title="向在线 Agent 下发巡检任务，收齐本机哈希后执行跨机 diff 对比">开始巡检</button></div>
+        </section>
+
+        <section class="inspect-step" aria-labelledby="inspectStepAutoSync">
+          <div class="inspect-step-head"><span>4</span><div><h3 id="inspectStepAutoSync">自动同步（用于定时巡检）</h3><p>仅在发现差异时，使用指定来源 Agent 覆盖异常 Agent；不会同步全网。手工巡检不会自动同步。</p></div></div>
+          <div class="inspect-fields">
+            <label class="inspect-field inspect-field-wide"><span><input id="inspectAutoSync" type="checkbox" /> 定时巡检完成后自动同步</span></label>
+            <label class="inspect-field"><span>来源 Agent</span><select id="inspectSyncSource" class="scope-select"></select></label>
+            <div class="inspect-field inspect-field-wide"><span>同步目标</span><div class="inspect-context-note">系统根据本次 diff 结果自动识别异常 Agent，仅向异常 Agent 下发同步任务。</div></div>
+          </div>
+        </section>
       </div>
       <div id="progress" class="progress" style="display:none"></div>
       <div id="dataDirNote" class="data-dir-note" style="display:none"></div>
     </section>
 
+    <section class="card" id="sec-inspection-plans">
+      <div class="card-head"><h2>巡检方案</h2><button id="addInspectionPlanBtn" class="btn primary">+ 新增方案</button></div>
+      <p class="tip">用于查看、执行、编辑和删除巡检方案。编辑方案会回填至“发起巡检”页面统一修改。</p>
+      <table class="tbl" id="inspectionPlanTable"><thead><tr><th>方案名称</th><th>业务数据集</th><th>Agent 范围</th><th>对比设置</th><th>自动同步</th><th>状态</th><th>最近更新</th><th>操作</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="card" id="sec-inspection-schedules">
+      <div class="card-head"><h2>定时巡检</h2><button id="addInspectionScheduleBtn" class="btn primary">+ 新增定时任务</button></div>
+      <p class="tip">定时任务直接关联巡检方案，到点后按方案保存的范围和对比设置自动执行。</p>
+      <table class="tbl" id="inspectionScheduleTable"><thead><tr><th>巡检方案</th><th>定时时间</th><th>状态</th><th>最近执行</th><th>操作</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="card" id="sec-agents">
+      <div class="card-head">
+        <h2>Agent 巡检</h2>
+        <div class="user-toolbar"><button id="batchAgentTagsBtn" class="btn">批量设置标签</button><button id="refreshAgentsBtn" class="btn">刷新</button></div>
+      </div>
+      <div id="agentStatusSummary" class="tip" style="margin-bottom:12px"></div>
+      <table id="agentTable" class="tbl">
+        <thead><tr><th><input id="agentSelectAll" type="checkbox" aria-label="全选 Agent" /></th><th>状态</th><th>Agent ID</th><th>主机名</th><th>内网 IP</th><th>外网 IP</th><th>物理分区</th><th>业务系统</th><th>标签</th><th>版本</th><th>最近心跳</th><th>最近任务</th><th>操作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
     <!-- 结果 -->
     <section class="card" id="resultCard" data-anchor="sec-result" style="display:none">
       <div class="card-head"><h2>巡检结果</h2></div>
+      <div class="result-run-panel"><div class="result-run-title">最近 5 次巡检结果</div><div id="recentRunsTable" class="result-run-table"><div class="empty">正在加载…</div></div></div>
       <div id="summary" class="summary"></div>
       <div id="resultDetail"></div>
     </section>
@@ -298,7 +379,10 @@
       <h3>市场</h3>
       <label>代码 <input id="m_code" /></label>
       <label>名称 <input id="m_name" /></label>
-      <label>巡检时间（HH:mm，逗号分隔，仅「按市场」模式生效，留空=不巡检）<input id="m_inspectTimes" type="text" placeholder="09:00,15:00" style="width:100%" /></label>
+      <label><input id="m_enabled" type="checkbox" /> 启用市场</label>
+      <label>行情目录 <input id="m_dataDir" placeholder="/home/MobileServer/DATA/SH/history/day" style="width:100%" /></label>
+      <label>文件匹配 <input id="m_filePattern" value="*.NIG" placeholder="*.NIG" style="width:100%" /></label>
+      <label>定时时间（HH:mm，逗号分隔，留空=不自动巡检）<input id="m_inspectTimes" type="text" placeholder="09:00,15:00" style="width:100%" /></label>
       <div class="actions">
         <button id="m_save" class="btn primary">保存</button>
         <button id="m_cancel" class="btn">取消</button>
@@ -343,8 +427,48 @@
       } catch (e) {}
       var hideBtn = document.getElementById('sidebarHideBtn');
       var showBtn = document.getElementById('sidebarShowBtn');
-      if (hideBtn) hideBtn.onclick = function () { setSidebarHidden(true); };
+      if (hideBtn) hideBtn.onclick = function () { setSidebarHidden(!document.body.classList.contains('sidebar-hidden')); };
       if (showBtn) showBtn.onclick = function () { setSidebarHidden(false); };
+      var refreshBtn = document.getElementById('headerRefreshBtn');
+      if (refreshBtn) refreshBtn.onclick = function () { window.location.reload(); };
+      var fullscreenBtn = document.getElementById('fullscreenBtn');
+      if (fullscreenBtn) fullscreenBtn.onclick = function () {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen();
+      };
+      var userBtn = document.getElementById('headerUserBtn');
+      var userMenu = document.getElementById('headerUserMenu');
+      var userName = '当前用户';
+      var userNameEl = document.getElementById('headerUserName');
+      var userAvatarEl = document.querySelector('.header-user-avatar');
+      function showCurrentUser(name) {
+        userName = name || '当前用户';
+        if (userNameEl) userNameEl.textContent = userName;
+        if (userAvatarEl) userAvatarEl.textContent = userName.charAt(0).toUpperCase();
+        if (userBtn) userBtn.setAttribute('aria-label', '当前登录用户 ' + userName);
+      }
+      fetch('/api/auth/me', { credentials: 'same-origin' }).then(function (response) {
+        if (!response.ok) throw new Error('unauthorized'); return response.json();
+      }).then(function (result) {
+        showCurrentUser(result.user && result.user.username);
+        var permissions = new Set(result.permissions || []);
+        document.querySelectorAll('[data-permission]').forEach(function (element) {
+          element.hidden = !permissions.has(element.getAttribute('data-permission'));
+        });
+        var current = document.querySelector('.nav-item.active[data-permission][hidden]');
+        if (current) window.location.hash = '#sec-dashboard';
+      }).catch(function () {
+        window.location.replace('/login' + window.location.hash);
+      });
+      if (userBtn && userMenu) userBtn.onclick = function () {
+        userMenu.hidden = !userMenu.hidden;
+        userBtn.setAttribute('aria-expanded', String(!userMenu.hidden));
+      };
+      var logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) logoutBtn.onclick = async function () {
+        try { await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' }); } catch (e) {}
+        window.location.replace('/login');
+      };
       // 屏幕尺寸变化时重新校正（宽→窄：显示；窄→宽：按记忆恢复）
       if (window.matchMedia) {
         window.matchMedia('(max-width: 900px)').addEventListener('change', function () {
@@ -361,6 +485,6 @@
       }
     })();
   </script>
-  <script src="/app.js"></script>
+  <script src="/app.js?v=dashboard-top-five"></script>
 </body>
 </html>
